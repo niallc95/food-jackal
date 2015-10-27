@@ -43,7 +43,7 @@ function check(){
       document.getElementById("poll").innerHTML=xmlhttp.responseText;
     }
   }
-  xmlhttp.open("POST","check.php);
+  xmlhttp.open("POST","check.php");
   xmlhttp.send();
 
 }
