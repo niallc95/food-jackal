@@ -19,7 +19,7 @@ include('database-connect.php');
 	echo '<br>';
 
 	//Insert Query
-	$insertSQL = "INSERT INTO Customer( customerFname, customerLname, customerEmail, customerAddress, customerDOB, customerAccountCreation, customerPassword )VALUES ('John', 'Newman', 'jm@yahoo.ie', '133 Hilltown Lawn', '1935/11/18', NOW( ) , '2324')";
+	$insertSQL = "INSERT INTO Customer( customerFname, customerLname, customerEmail, customerAddress, customerDOB, customerAccountCreation, 	customerPassword )VALUES ('John', 'Newman', 'jm@yahoo.ie', '133 Hilltown Lawn', '1935/11/18', NOW( ) , '2324')";
 
 	$connection-> insertData($insertSQL); 
 
