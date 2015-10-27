@@ -29,7 +29,7 @@ if($_POST)
 		
 	?>
 
-	<!--Display the account summary after submission after server side validation-->
+	<!-- Display the account summary after submission after server side validation -->
     	<table style="width:100%;"> 
 		<tr>
 			<center><th colspan="2">Welcome to Food Jackal <?php echo $fname;?></th></center>
@@ -61,19 +61,22 @@ if($_POST)
 			<td>Securely Stored and Encrypted</td>	
 		</tr>
 	</table>
-   
+	<center>
+		<h3> To setup your payment preferences go the the settings once logged in. </h3>
+	</center>
+   	
 
 	<?php
-	/* Push data to the database 
+	//Push data to the database 
 
 	$connection = new Database;
 
 	$connection->connectToDatabase();
 
-	$insert = "INSERT INTO Customer( customerFname, customerLname, customerEmail, customerAddress, customerDOB, customerAccountCreation, 		customerPassword )VALUES ('.$fname.', '.$lname.', '.$email.', '.$address.','.$dob.', NOW( ) , '.$pass1.')";
+	$insert = "INSERT INTO Customer( customerFname, customerLname, customerEmail, customerAddress, customerDOB, customerAccountCreation, 		customerPassword )VALUES ('$fname', '$lname', '$email', '$address','$dob', NOW( ) , '$pass1')";
 
 	$connection-> insertData($insert);
-	*/
+
 	?>
 	
 	
