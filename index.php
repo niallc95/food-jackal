@@ -30,7 +30,16 @@
 <body>
 
     <!-- Navigation -->
-    <?php include './includes/header.php';?>
+    <?php
+    if(isset($_COOKIE['user']))
+    {
+    	include './includes/logged_header.php';
+    }
+    else
+    {
+    	include ' ./includes/header.php';
+    }
+    ?>
 
     
     
