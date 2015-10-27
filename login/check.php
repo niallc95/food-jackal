@@ -10,13 +10,20 @@ if(!(isset($_POST['email']))&&(!(isset($_POST['pass'])))){
 	header("Location: ../index.php");
 }
 
-include('food-jackal/classes/database/database-connect.php');
+include('../food-jackal/classes/database/database-connect.php');
 
 $con = new Database;
 $con->connectToDatabase();
 
+if(isset($_POST['submit'])){_
 $email = $_POST['email'];
 $pass = $_POST['pass'];
+}
+else{
+	include "Login.php";
+	session_start();
+	$_SESSION['error'] = "Something went wrong. Please try again.";
+}
 
 $query = "SELECT * FROM users WHERE password='$pass' AND email='$email'";
 
