@@ -1,8 +1,13 @@
 <?php
-	
-/*@author Graham Murray
-* @description This file is to test the database connection class
-*
+
+/*
+ * @category  MySQLi Data Access Layer
+ * @package   classes/databases
+ * @file      db-test.php
+ * @data      26/10/15
+ * @author    Graham Murray <graham@graham-murray.com>
+ * @copyright Copyright (c) 2015
+ * @description This file is to test the Database class to ensure it functions correctly.
 */
 
 include('database-connect.php');
@@ -26,8 +31,19 @@ include('database-connect.php');
 	
 	
 	//Update Query
-	$update = "UPDATE Customer SET customerFname='Fart' WHERE customerId=2";
+	$update = "UPDATE Customer SET customerFname='Fart' WHERE customerId=3";
 	$connection -> updateDatabase($update);
+	
+	for($i = 61; $i <=67; $i++)
+	{
+	//Delete Data
+	$delete = "DELETE FROM Customer
+		WHERE customerId = ".$i;
+
+	$connection -> deleteData($delete);
+	echo 'Record '.$i.' deleted';
+	}
+
 
 	//Close Connection
 	$connection->closeConnection();

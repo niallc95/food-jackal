@@ -1,5 +1,12 @@
 <?php
-
+/*
+ * @category  MySQLi Data Access Layer
+ * @package   classes/databases
+ * @file      database-connection.php
+ * @data      26/10/15
+ * @author    Graham Murray <graham@graham-murray.com>
+ * @copyright Copyright (c) 2015
+*/
 class Database{
 		
 
@@ -21,7 +28,7 @@ class Database{
 			die("Cannot connect to database. Ref: database-connect.php");
 		}
 	
-		echo "Connection Established";
+	
 
 	}//Close mysql_connect
 	
@@ -30,7 +37,7 @@ class Database{
 	public function selectData($sql){
 
 		if(empty($sql)){
-			die("Select Statement is Null. Ref: ".__FILE__);
+			die('SELECT Query Failed '.$this->conn->error);
 		}
 		$this->result = $this->conn->query($sql);
 
@@ -38,19 +45,27 @@ class Database{
 	}
 	
 	
-	/*Insert Data*/
+	/* Insert Data */
 	public function insertData($sql){
 		
 		if($this->conn->query($sql) === FALSE){
-			echo '<br>'.'Insert Failed '.$this->conn->error;
+			die('Insert Query Failed '.$this->conn->error);
 		}
 
 	}
 
-	/*Update Database*/
+	/* Update Database */
 	public function updateDatabase($sql){
 		if($this->conn->query($sql) === FALSE){
-			echo '<br>'.'Update Query Failed '.$this->conn->error;
+			die('Update Query Failed '.$this->conn->error);
+		}
+	}
+
+	/* Delete Data */
+
+	public function deleteData($sql){
+		if($this->conn->query($sql) === FALSE){
+			die('Delete Query Failed '.$this->conn->error);
 		}
 	}
 	
@@ -58,7 +73,6 @@ class Database{
 	public function closeConnection()
 	{
 		$this->conn->close();
-		echo '<br>'."Connection Closed";
 	}
 	
 
