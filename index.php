@@ -30,17 +30,18 @@
 <body>
 
     <!-- Navigation -->
+	
     <?php
     if(isset($_COOKIE['user']))
     {
-    	include './includes/logged_header.php';
+    	include ('./includes/logged_header.php');
     }
     else
     {
-    	include ' ./includes/header.php';
+    	include ('./includes/header.php');
     }
     ?>
-
+ 
     
     
     <!-- Page Content -->
