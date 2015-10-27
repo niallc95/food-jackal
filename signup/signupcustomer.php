@@ -33,7 +33,9 @@
 
 	<!-- Ajax form submit -->
 	<script type="text/javascript">
-            $(document).ready(function ()
+            
+	
+	$(document).ready(function ()
             {
 
 
@@ -67,6 +69,7 @@
                     return false;
                 });
             });
+		
         </script>
 	
 	<style type="text/css">

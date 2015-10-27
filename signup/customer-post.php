@@ -26,6 +26,7 @@ if($_POST)
 	
 	<?php 
 	/* Server Side Validation to be performed here */
+		//Check if input email already exists in database
 		
 	?>
 
