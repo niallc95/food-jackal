@@ -1,12 +1,15 @@
 <?
 
 //Includes
-include('');
-if(!empty($_POST["fname"]) || !empty($_POST["lname"]) || !empty($_POST["address"]) || !empty($_POST["dob"]) || !empty($_POST["email"]) || !empty($_POST["pass"]) || !empty($_POST["pass2"]){
+include('../classes/security/security.php');
+include('../classes/database/database-connect.php');
 
+if(!empty($_POST["fname"]) || !empty($_POST["lname"]) || !empty($_POST["address"]) || !empty($_POST["dob"]) || !empty($_POST["email"]) || !empty($_POST["pass"])){
+
+	/*Error Handling*/
+	
 	
 
-	
 	/*Data from form*/
 	$FNAME = $_POST["fname"];
 	$LNAME = $_POST["lname"];
@@ -16,8 +19,13 @@ if(!empty($_POST["fname"]) || !empty($_POST["lname"]) || !empty($_POST["address"
 	$PASSWORD = $_POST["pass"];
 	$CREATE_TIMESTAMP = date("Y-m-d G:i:s");//SQL Timestamp
 
-	
+	//New Instance of security class
+	$security = new Security;
 
+	
+	if($security -> emailValidation($EMAIL) == false){
+		die("Invalid Email");
+	}
 	
 	
 
@@ -26,4 +34,5 @@ if(!empty($_POST["fname"]) || !empty($_POST["lname"]) || !empty($_POST["address"
 	die("Invalid Request (Form error)");
 	}
 ?>
+
 

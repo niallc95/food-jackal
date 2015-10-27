@@ -86,7 +86,7 @@
                         <label>Re Enter Password:</label>
                         <input type="password" class="form-control" placeholder ="Enter in your password here:" name="pass2">
                         <br>
-                        <input type = "submit" class="btn btn-success" value="Submit!" formaction="db_post.php" name="post"/>                    
+                        <input type = "submit" class="btn btn-success" value="Submit!" formaction="customer-post.php" name="post"/>                    
 					</form>
 
                 </div>
