@@ -9,7 +9,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Shop Item - Start Bootstrap Template</title>
+        <title>Food Jackal - Customer Signup</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -25,7 +25,69 @@
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 
+	<!-- AngularJS -->
+	<script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script> 
+        
+	<!-- JQuery -->
+	<script src= "../javascript/jquery-1.11.3-jquery.min.js"></script>
+
+	<!-- Ajax form submit -->
+	<script type="text/javascript">
+            $(document).ready(function ()
+            {
+
+
+                $(document).on('submit', '#reg-form', function ()
+                {
+
+                    //var fn = $("#fname").val();
+                    //var ln = $("#lname").val();
+
+                    //var data = 'fname='+fn+'&lname='+ln;
+
+                    var data = $(this).serialize();
+
+
+                    $.ajax({
+                        type: 'POST',
+                        url: 'customer-post.php',
+                        data: data,
+                        success: function (data)
+                        {
+                            $("#reg-form").fadeOut(500).hide(function ()
+                            {
+                                $(".result").fadeIn(500).show(function ()
+                                {
+                                    $(".result").html(data);
+                                });
+                            });
+
+                        }//Close Success
+                    });
+                    return false;
+                });
+            });
+        </script>
+	
+	<style type="text/css">
+	table, th, td {
+	    border: 1px solid black;
+	    border-collapse: collapse; 
+	    margin-top:100px;
+	}
+	th, td {
+	    padding: 5px;
+	    text-align: center;
+	}td{
+		width:50%;
+	}
+	
+	</style>
+	
+	
     </head>
+
+
 
     <body>
 
@@ -45,56 +107,119 @@
                 </div>
 
                 <div class="col-md-6">
+		
+		    <!-- DIV to display data after ajax function -->
+		    <div  class="result">
 
-                    <form role="form" method="post" action="signupsuccess" onSubmit="return validate(this);" name="form">
+		    </div>
+
+                    <form ng-app="myApp" method="post" id="reg-form" ng-controller="validateCtrl" name="myForm">
                         <br>
                         <br>   
                         <br>
                         <br>
-                        <label>First Name:</label>
-                        <input type="text" class="form-control" name="fname">
-
+                        
+			<label>First Name:</label>
+                        <input type="text" 
+				class="form-control" 
+				name="fname" 
+				ng-model="fname" 
+				required>
+			  <span style="color:red" ng-show="myForm.fname.$dirty && myForm.fname.$invalid">
+			  	<span ng-show="myForm.fname.$error.required">Firstname is required.</span>
+			  </span>
                         <br>
 
                         <label>Last Name:</label>
-                        <input type="text" class="form-control"  name="lname">
+                        <input type="text" 
+				class="form-control" 
+				name="lname" 
+				ng-model="lname" 
+				required>
+			  <span style="color:red" ng-show="myForm.lname.$dirty && myForm.lname.$invalid">
+			  	<span ng-show="myForm.lname.$error.required">Lastname is required.</span>
+			  </span>
 
                         <br>
-                        
+
                         <label>Address:</label>
-                        <input type="text" class="form-control"  name="address">
 
+			<input type="text" 
+				class="form-control" 
+				name="address" 
+				ng-model="address" 
+				required>
+			  <span style="color:red" ng-show="myForm.address.$dirty && myForm.address.$invalid">
+			  	<span ng-show="myForm.address.$error.required">Address is required.</span>
+			  </span>
                         <br>
-                        
+
                         <label>Date of Birth:</label>
-                        <input type="text" class="form-control" placeholder="mm/dd/yyyy" name="dob">
+			
+			<input type="text" 
+				class="form-control" 
+				placeholder="yyyy-mm-dd" 
+				name="dob" 
+				ng-model="dob" 
+				ng-pattern='/^[0-9]{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])/' 
+				required>
+			  <span style="color:red" ng-show="myForm.dob.$dirty && myForm.dob.$invalid">
+			  	<span ng-show="myForm.dob.$error.required">D.O.B is required.</span>
+				<span ng-show="myForm.dob.$error.">Invalid date format.</span>
+			  </span>
 
                         <br>
 
-                        
+
 
                         <label>E-mail:</label>
-                        <input type="text" class="form-control"  name="email">
+
+			<input type="email" 
+			       class="form-control" 
+                               name="email" 
+                               ng-model="email" 
+                               required>
+			  <span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
+				  <span ng-show="myForm.email.$error.required">Email is required.</span>
+				  <span ng-show="myForm.email.$error.email">Invalid email address.</span>
+			  </span>
 
                         <br>
 
                         <label>Password:</label>
-                        <input type="password" class="form-control"  placeholder ="Enter in your password here:" name="pass">
-                        
-                        <br>
-                        
-                        <label>Re Enter Password:</label>
-                        <input type="password" class="form-control" placeholder ="Enter in your password here:" name="pass2">
-                        <br>
-                        <input type = "submit" class="btn btn-success" value="Submit!" formaction="customer-post.php" name="post"/>                    
-					</form>
+                        <input type="password" 
+				class="form-control" 
+				name="pw1" 
+				ng-model="pw1" 
+				required>
+			  <span style="color:red" ng-show="myForm.pw1.$dirty && myForm.pw1.$invalid">
+			  	<span ng-show="myForm.pw1.$error.required">Password is required.</span>
+			  </span>
 
+                        <br>
+
+                        <label>Confirm Password:</label>
+                        <input type="password" 
+				class="form-control" 
+				name="pw2" 
+				ng-model="pw2" 
+				required>
+			  <span style="color:red" ng-show="myForm.pw2.$dirty && myForm.pw2.$invalid">
+			  	<span ng-show="myForm.pw2.$error.required">Password Confimation is required.</span>
+			  </span>
+				                       
+			<br>
+
+			<input type="submit" value="Register" class="btn btn-success" ng-disabled="myForm.fname.$dirty && myForm.fname.$invalid || 				myForm.lname.$dirty && myForm.lname.$invalid || myForm.address.$dirty && myForm.address.$invalid || myForm.email.$dirty && 				myForm.email.$invalid || myForm.dob.$dirty && myForm.dob.$invalid || myForm.pw1.$dirty && myForm.pw1.$invalid
+			|| myForm.pw2.$dirty && myForm.pw2.$invalid" >              
+                    </form>		   
+			
                 </div>
             </div>
         </div>
         <!-- /.container -->
 
-        
+
         <div class="container">
 
             <hr>
@@ -111,11 +236,32 @@
         </div>
         <!-- /.container -->
 
-        <!-- jQuery -->
-        <script src="js/jquery.js"></script>
+
 
         <!-- Bootstrap Core JavaScript -->
         <script src="js/bootstrap.min.js"></script>
+	
+	
+
+
+	
+	
+	<script>
+		var app = angular.module('myApp', []);
+		app.controller('validateCtrl', function($scope) {
+		    $scope.fname = 'John';
+		    $scope.lname = 'Doe';
+		    $scope.address = '';
+		    $scope.dob= null;
+		    $scope.email = '';
+		    $scope.pw1 = '';
+		    $scope.pw2 = '';
+
+		});
+
+		
+		
+	</script>
 
     </body>
 

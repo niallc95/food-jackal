@@ -1,38 +1,84 @@
-<?
-
+<?php
+/*
+ * @category  Push data to database
+ * @package   signup
+ * @file      customer-post.php
+ * @data      26/10/15
+ * @author    Graham Murray <graham@graham-murray.com>
+ * @copyright Copyright (c) 2015
+*/
 //Includes
-include('../classes/security/security.php');
+include('../classes/security/validation.php');
 include('../classes/database/database-connect.php');
 
-if(!empty($_POST["fname"]) || !empty($_POST["lname"]) || !empty($_POST["address"]) || !empty($_POST["dob"]) || !empty($_POST["email"]) || !empty($_POST["pass"])){
 
-	/*Error Handling*/
+if($_POST)
+{
+	$fname = $_POST['fname'];
+	$lname = $_POST['lname'];
+	$address = $_POST['address'];
+	$dob = $_POST['dob'];
+	$email = $_POST['email'];
+	$pass1 = $_POST['pw1'];
+	$pass2 = $_POST['pw2'];
+	
+?>	
+	
+	<?php 
+	/* Server Side Validation to be performed here */
+		
+	?>
+
+	<!--Display the account summary after submission after server side validation-->
+    	<table style="width:100%;"> 
+		<tr>
+			<center><th colspan="2">Welcome to Food Jackal <?php echo $fname;?></th></center>
+		</tr>
+		
+		<tr>
+			<center><th colspan="2">Account Summary</th></center>
+		</tr>
+		
+		<tr>
+			<td>First Name:</td>
+			<td><?php echo $fname;?></td>	
+		</tr>
+		<tr>
+			<td>Last Name:</td>
+			<td><?php echo $lname;?></td>	
+		</tr>
+		<tr>
+			<td>Date of Birth:</td>
+			<td><?php echo $dob;?></td>	
+		</tr>
+		<tr>
+			<td>Email Address:</td>
+			<td><?php echo $email;?></td>	
+		</tr>
+
+		<tr>
+			<td>Password:</td>
+			<td>Securely Stored and Encrypted</td>	
+		</tr>
+	</table>
+   
+
+	<?php
+	/* Push data to the database 
+
+	$connection = new Database;
+
+	$connection->connectToDatabase();
+
+	$insert = "INSERT INTO Customer( customerFname, customerLname, customerEmail, customerAddress, customerDOB, customerAccountCreation, 		customerPassword )VALUES ('.$fname.', '.$lname.', '.$email.', '.$address.','.$dob.', NOW( ) , '.$pass1.')";
+
+	$connection-> insertData($insert);
+	*/
+	?>
 	
 	
 
-	/*Data from form*/
-	$FNAME = $_POST["fname"];
-	$LNAME = $_POST["lname"];
-	$ADDRESS = $_POST["address"];
-	$DOB = $_POST["dob"];
-	$EMAIL = $_POST["email"];
-	$PASSWORD = $_POST["pass"];
-	$CREATE_TIMESTAMP = date("Y-m-d G:i:s");//SQL Timestamp
+<?php	
+}
 
-	//New Instance of security class
-	$security = new Security;
-
-	
-	if($security -> emailValidation($EMAIL) == false){
-		die("Invalid Email");
-	}
-	
-	
-
-
-}else{
-	die("Invalid Request (Form error)");
-	}
 ?>
-
-
