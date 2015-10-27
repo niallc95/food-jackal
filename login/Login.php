@@ -30,7 +30,24 @@ if(isset($_COOKIE['user'])){
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+<script>
+function check(){
+	if (window.XMLHttpRequest) {
+    // code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp=new XMLHttpRequest();
+  } else {  // code for IE6, IE5
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xmlhttp.onreadystatechange=function() {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+      document.getElementById("poll").innerHTML=xmlhttp.responseText;
+    }
+  }
+  xmlhttp.open("POST","check.php);
+  xmlhttp.send();
 
+}
+</script>
 </head>
 
 <body>
@@ -89,7 +106,7 @@ if(isset($_COOKIE['user'])){
     <div class="container">
     <?php
     if(isset($_SESSION['error'])){
-        echo '<div class="alert alert-danger alert-dismissible" role="alert">
+        echo '<div class="alert alert-danger alert-dismissible" id="poll" role="alert">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
   '.$_SESSION['error'].' 
 </div>';
@@ -108,7 +125,7 @@ if(isset($_COOKIE['user'])){
       <input type="password" class="form-control" name="pass" id="pass" placeholder ="Enter in your password.">
     </div>
     <div class="col-sm-offset-0 col-sm-10">
-        <input type = "submit" name ="submit" class="btn btn-success"  value="Submit!"/>
+        <input type = "submit" name ="submit" class="btn btn-success" onclick="check()" value="Submit!"/>
    </div>
 
       </div>
