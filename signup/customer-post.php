@@ -21,7 +21,9 @@ if($_POST)
 	$email = $_POST['email'];
 	$pass1 = $_POST['pw1'];
 	$pass2 = $_POST['pw2'];
-	
+}
+if((!empty($pass1))&&(!empty($pass2))&&($pass1 == $pass2))
+{
 ?>	
 	
 	<?php 
@@ -83,6 +85,10 @@ if($_POST)
 	
 
 <?php	
+}
+else{
+	include ''
+	$error = "Passwords do not match";
 }
 
 ?>
