@@ -53,9 +53,9 @@ include('database-connect.php');
     	 // output data of each row
     	 while($row = $dataset->fetch_assoc()) {
          	echo "<br> id: ". $row["customerId"]. " - Name: ". $row["customerFname"]." ".$row["customerLname"]. "<br>";
-     	}
-		} else {
-     			echo "0 results";
+     		}
+	} else {
+		echo "0 results";
 		}
 	
 
