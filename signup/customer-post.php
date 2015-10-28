@@ -12,7 +12,7 @@ include('../classes/security/validation.php');
 include('../classes/database/database-connect.php');
 
 $connection = new Database;
-$validate = new Validate;
+$validate = new Validation;
 
 if($_POST){
 	$fname = $_POST['fname'];
@@ -32,18 +32,43 @@ if($_POST){
 ?>	
 	
 	<?php 
-	/* Server Side Validation to be performed here */
+	/* Server Side Validation performed here */
 		
-		//Check if user already exists
-		$userExist = $validate->checkEmailExistsCustomer($email,"SELECT customerEmail FROM Customer");
-		if($userExist){
+	
+		
+
+		/* Check if email already exists in database*/
+		$emailExist= false;		
+		
+		$statement = 'SELECT customerEmail FROM Customer';
+		//Select Query
+		$connection->connectToDatabase();//Connect to database
+		$dataset = $connection->selectData($statement);
+	
+		
+
+
+		if ($dataset->num_rows > 0) {
+	    	 
+		// output data of each row
+			while($row = $dataset->fetch_assoc()) {
+		 		if($row["customerEmail"] == $email){
+					$emailExist = true;
+				}
+			}	    	 	
+		}
+	
+		
+		
+		
+		if($emailExist){
 			array_push($errors, "User ".$email." already exists.");
 		}
-
-		//Check if email is valid
-		if(!$validate->emailValidation($email)){
-			array_push($errors, "Invalid Email Address Format.");
-		}
+		
+		
+		
+		
+		
 		
 		//Check if dob is valid format
 		if(!$validate->validMySQLDate($dob)){	
@@ -57,7 +82,7 @@ if($_POST){
 		
 		//Check if lastname if alpha
 		if(!$validate->checkAlphaCharacter($lname)){
-			array_push($errors, "Firstname must only contain alpha characters");
+			array_push($errors, "Lastname must only contain alpha characters");
 		}		
 	
 		//Check if passwords match or a greater than 6 character
@@ -65,12 +90,12 @@ if($_POST){
 			array_push($errors, "Passwords do not match.");
 		}
 		//Check password size >= 6 
-		if(strlen($pass1) >= 6){
-			array_push($errors, "Password must aleast 6 character in length.");
+		if(strlen($pass1) < 6){
+			array_push($errors, "Password must at least 6 character in length.");
 		}
 
 		
-	if(count($error) < 1){	
+	if(count($errors) < 1){	
 	?>
 	<!-- Display the account summary after submission after server side validation -->
     	<table style="width:100%;"> 
@@ -110,7 +135,6 @@ if($_POST){
    	
 	<?php
 	//Push data to the database 
-	$connection->connectToDatabase();
 	$insert = "INSERT INTO Customer( customerFname, customerLname, customerEmail, customerAddress, customerDOB, customerAccountCreation, 		customerPassword )VALUES ('$fname', '$lname', '$email', '$address','$dob', NOW( ) , '$pass1')";
 	$connection-> insertData($insert);
 	$connection->closeConnection();
@@ -121,10 +145,10 @@ if($_POST){
 	<?php
 	}else{//Print All the errors instead of the account summary
 		
-		echo '<div>';		
+		echo '<div style="margin-top:120px;">';		
 		for($i=0; $i < count($errors); $i++){
 			
-			echo '<span class="error">'.$errors[$i].'</span>';
+			echo '<span class="error">'.$errors[$i].'</span><br>';
 		}//Close for loop
 		echo '</div>';
 	     }
