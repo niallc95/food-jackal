@@ -103,13 +103,13 @@
         <!-- Page Content -->
         <div class="container">
         	<?php
-    if(isset($error)){
-        echo '<div class="alert alert-danger alert-dismissible" id="poll" role="alert">
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  '.$error.' 
-</div>';
-    }
-    ?>
+		    if(isset($error)){
+			echo '<div class="alert alert-danger alert-dismissible" id="poll" role="alert">
+		 	 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		  	'.$error.' 
+			</div>';
+		    }
+	    	 ?>
 
             <div class="row">
 
