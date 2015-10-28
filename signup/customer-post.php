@@ -11,6 +11,8 @@
 include('../classes/security/validation.php');
 include('../classes/database/database-connect.php');
 
+$connection = new Database;
+$validate = new Validate;
 
 if($_POST)
 {
@@ -22,14 +24,52 @@ if($_POST)
 	$pass1 = $_POST['pw1'];
 	$pass2 = $_POST['pw2'];
 	
+
+	$errors = array();//Array to hold error messages
+	
 ?>	
 	
 	<?php 
 	/* Server Side Validation to be performed here */
-		//Check if input email already exists in database
 		
-	?>
+		//Check if user already exists
+		$userExist = $validate->checkEmailExistsCustomer($email,"SELECT customerEmail FROM Customer");
+		if($userExist){
+			array_push($errors, "User ".$email." already exists.");
+		}
 
+		//Check if email is valid
+		if(!$validate->emailValidation($email)){
+			array_push($errors, "Invalid Email Address Format.");
+		}
+		
+		//Check if dob is valid format
+		if(!$validate->validMySQLDate($dob)){	
+			array_push($errors, "Invalid Date Format. Please use yyyy-mm-dd");
+		}
+		
+		//Check if firstname if alpha
+		if(!$validate->checkAlphaCharacter($fname)){
+			array_push($errors, "Firstname must only contain alpha characters");
+		}		
+		
+		//Check if lastname if alpha
+		if(!$validate->checkAlphaCharacter($lname)){
+			array_push($errors, "Firstname must only contain alpha characters");
+		}		
+	
+		//Check if passwords match or a greater than 6 character
+		if($pass1 != $pass2){
+			array_push($errors, "Passwords do not match.");
+		}
+		//Check password size >= 6 
+		if(strlen($pass1) >= 6){
+			array_push($errors, "Password must aleast 6 character in length.");
+		}
+
+		
+	if(count($error) < 1){	
+	?>
 	<!-- Display the account summary after submission after server side validation -->
     	<table style="width:100%;"> 
 		<tr>
@@ -66,19 +106,32 @@ if($_POST)
 		<h3> To setup your payment preferences go the the settings once logged in. </h3>
 	</center>
    	
-
 	<?php
 	//Push data to the database 
-
-	$connection = new Database;
-
 	$connection->connectToDatabase();
-
 	$insert = "INSERT INTO Customer( customerFname, customerLname, customerEmail, customerAddress, customerDOB, customerAccountCreation, 		customerPassword )VALUES ('$fname', '$lname', '$email', '$address','$dob', NOW( ) , '$pass1')";
-
 	$connection-> insertData($insert);
+	$connection->closeConnection();
+	?>
+	
+	
+	
+	<?php
+	}else{//Print All the errors instead of the account summary
+		
+		echo '<div>';		
+		for($i=0; $i < count($errors); $i++){
+			
+			echo '<span class="error">'.$errors[$i].'</span>';
+		}//Close for loop
+		echo '</div>';
+	     }
+
 
 	?>
+
+
+
 	
 	
 
