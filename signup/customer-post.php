@@ -14,8 +14,7 @@ include('../classes/database/database-connect.php');
 $connection = new Database;
 $validate = new Validate;
 
-if($_POST)
-{
+if($_POST){
 	$fname = $_POST['fname'];
 	$lname = $_POST['lname'];
 	$address = $_POST['address'];
@@ -23,10 +22,13 @@ if($_POST)
 	$email = $_POST['email'];
 	$pass1 = $_POST['pw1'];
 	$pass2 = $_POST['pw2'];
-	
+
 
 	$errors = array();//Array to hold error messages
 	
+
+
+
 ?>	
 	
 	<?php 
@@ -137,5 +139,4 @@ if($_POST)
 
 <?php	
 }
-
 ?>
