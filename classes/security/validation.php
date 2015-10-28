@@ -5,16 +5,12 @@
  * @author    Graham Murray <graham@graham-murray.com>
  * @copyright Copyright (c) 2015
 */
-include('../database/database-connect.php');
 
+
+	
 class Validation{
 	
-	public $connection;
 
-        public function Validation()//Constructor
-        {
-            $this->connection = new Database;
-        }
 
 	
 	/* Check if input is a valid email address */
@@ -50,38 +46,11 @@ class Validation{
 	}
 	
 
-	/* Check if a customer email already exists in database for sign up */
-	public function checkEmailExistsCustomer($email,$statement)
-	{
-		$emailExist= false;		
-			
-		//Select Query
-		$this->connection->connectToDatabase();//Connect to database
-		$dataset = $this->connection->selectData($statement);
-		$this->connection->closeConnection();
-		
-
-		if ($dataset->num_rows > 0) {
-	    	 
-		// output data of each row
-			while($row = $dataset->fetch_assoc()) {
-		 		if($row["customerEmail"] == $email){
-					$emailExist = true;
-				}
-			}	    	 	
-		} else {
-     			echo "0 results";
-			}
-		return $emailExist;
-
-		
-	}
+	
 
 }//Close Class
 
-$val = new Validation;
 
-echo var_dump($val->validMySQLDate('1995-1-14'));
 
 
 
