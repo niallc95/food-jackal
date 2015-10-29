@@ -49,15 +49,12 @@
                         url: 'customer-post.php',
                         data: data,
                         success: function (data)
-                        {
-                            $("#reg-form").fadeOut(500).hide(function ()
+                        {         
+                            $(".result").fadeIn(500).show(function ()
                             {
-                                $(".result").fadeIn(500).show(function ()
-                                {
-                                    $(".result").html(data);
-                                });
+                                $(".result").html(data);
                             });
-
+                            
                         }//Close Success
                     });
                     return false;
@@ -65,12 +62,19 @@
             });
 		
         </script>
+
+        <!-- Reset Form after submission -->
+        <script type="text/javascript">
+			function resetForm() {
+			    document.getElementById("reg-form").reset();
+			}
+		</script>
 	
 	<style type="text/css">
 	table, th, td {
 	    border: 1px solid black;
 	    border-collapse: collapse; 
-	    margin-top:100px;
+	    margin-top:20px;
 	}
 	th, td {
 	    padding: 5px;
@@ -80,6 +84,7 @@
 	}
 	.error{
 	color:red;	
+	text-align:center;
 	}
 	</style>
 	
@@ -98,14 +103,6 @@
 
         <!-- Page Content -->
         <div class="container">
-        	<?php
-		    if(isset($error)){
-			echo '<div class="alert alert-danger alert-dismissible" id="poll" role="alert">
-		 	 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		  	'.$error.' 
-			</div>';
-		    }
-	    	 ?>
 
             <div class="row">
 
@@ -114,11 +111,7 @@
                 </div>
 
                 <div class="col-md-6">
-		
-		    <!-- DIV to display data after ajax function -->
-		    <div  class="result">
-
-		    </div>
+	
 
                     <form ng-app="myApp" method="post" id="reg-form" ng-controller="validateCtrl" name="myForm">
                         <br>
@@ -220,7 +213,11 @@
 			<input type="submit" value="Register" class="btn btn-success" ng-disabled="myForm.fname.$dirty && myForm.fname.$invalid || 				myForm.lname.$dirty && myForm.lname.$invalid || myForm.address.$dirty && myForm.address.$invalid || myForm.email.$dirty && 				myForm.email.$invalid || myForm.dob.$dirty && myForm.dob.$invalid || myForm.pw1.$dirty && myForm.pw1.$invalid
 			|| myForm.pw2.$dirty && myForm.pw2.$invalid" >              
                     </form>		   
-			
+				
+				<!-- DIV to display data after ajax function -->
+		    	<div  class="result">
+		    		<!-- Form submission results displayed here-->
+		    	</div>
                 </div>
             </div>
         </div>

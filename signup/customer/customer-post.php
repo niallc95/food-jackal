@@ -71,22 +71,22 @@ if($_POST){
 		
 		
 		//Check if dob is valid format
-		if(!$validate->validMySQLDate($dob)){	
+		if(!$validate->validMySQLDate($dob) || empty($dob)){	
 			array_push($errors, "Invalid Date Format. Please use yyyy-mm-dd");
 		}
 		
 		//Check if firstname if alpha
-		if(!$validate->checkAlphaCharacter($fname)){
+		if(!($validate->checkAlphaCharacter($fname)) || empty($fname)){
 			array_push($errors, "Firstname must only contain alpha characters");
 		}		
 		
 		//Check if lastname if alpha
-		if(!$validate->checkAlphaCharacter($lname)){
+		if(!($validate->checkAlphaCharacter($lname)) || empty($lname)){
 			array_push($errors, "Lastname must only contain alpha characters");
 		}		
 	
 		//Check if passwords match or a greater than 6 character
-		if($pass1 != $pass2){
+		if($pass1 != $pass2 || empty($pass1)){
 			array_push($errors, "Passwords do not match.");
 		}
 		//Check password size >= 6 
@@ -145,11 +145,12 @@ if($_POST){
 	<?php
 	}else{//Print All the errors instead of the account summary
 		
-		echo '<div style="margin-top:120px;">';		
+		echo '<div style="margin-top:20px; border:1px solid white;">';		
 		for($i=0; $i < count($errors); $i++){
 			
-			echo '<span class="error">'.$errors[$i].'</span><br>';
+			echo '<center><span class="error">'.$errors[$i].'</span></center><br>';
 		}//Close for loop
+		echo '<script type="text/javascript">resetForm()</script>';
 		echo '</div>';
 	     }
 
