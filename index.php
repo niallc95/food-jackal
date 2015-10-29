@@ -13,7 +13,7 @@
 
 
     <!-- Hotlinks for scripts-->
-    <?php include('./includes/links.php')?>
+    <?php include('./includes/links.php'); ?>
 
 
 
@@ -44,7 +44,7 @@
     
     
     <!-- Page Content -->
-    <div class="container">
+    <div class="container top-margin-content">
 
         <div class="row">
 
