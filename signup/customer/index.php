@@ -9,14 +9,10 @@
         <meta name="description" content="">
         <meta name="author" content="Graham Murray" >
 
-        <title>Food Jackal - Customer Signup</title>
+        <title>Food Jackal - Customer Registration</title>
 
-        <!-- Bootstrap Core CSS -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
 
-        <!-- Custom CSS -->
-        <link href="css/shop-item.css" rel="stylesheet">
-        <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/slate/bootstrap.min.css" rel="stylesheet">
+        
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -25,11 +21,9 @@
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 
-	<!-- AngularJS -->
-	<script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script> 
+	<?php include('../../includes/links.php')?>
         
-	<!-- JQuery -->
-	<script src= "../../javascript/jquery-1.11.3-jquery.min.js"></script>
+
 
 	<!-- Ajax form submit -->
 	<script type="text/javascript">
