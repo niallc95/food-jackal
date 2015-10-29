@@ -45,7 +45,14 @@ class Validation{
 			}
 	}
 	
-
+	/* Validate Irish Phone Number*/
+	public function checkIrishLandline($input){
+		if(!preg_match("/^\s*(\(?\s*\d{1,4}\s*\)?\s*[\d\s]{5,10})\s*$/",$input)){
+			return false;
+		}else{
+			return true;
+			}
+	}
 	
 
 }//Close Class
