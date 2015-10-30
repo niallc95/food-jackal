@@ -12,11 +12,8 @@
     	<!-- Customer CSS-->
         <link type="text/css" rel="stylesheet" href="../../css/custom.css"/>
 
-        <!-- CSS for Image Upload -->
-        <link type="text/css" rel="stylesheet" href="../../css/image-upload-style.css"/>
 
-        <!-- Image Upload Script -->
-        <script type="text/javascript" src="image-upload-script.js"></script>
+
 
 
         <title>Food Jackal - Vendor Registration</title>
@@ -120,30 +117,9 @@
         <!-- Page Content -->
         <div class="container top-margin-content">
             <div class="row">
-            	<h2 class="lead center-text">Vendor Registration</h2>
             	
-            	<div class="col-md-6 col-lg-6" style="background-color:blue;" >
-					
-					<div class="main">
-					<h1>Upload Images for Post</h1><br/>
-					<hr>
-						<center>
-							<form id="uploadimage" action="" method="post" enctype="application/x-www-form-urlencoded">
-								<div id="image_preview"><img id="previewing" src="./images/noimage.png" /></div>
-								<hr id="line">
-								<div id="selectImage">
-									<label>Select Your Image</label><br/>
-									<input type="file" name="file" id="file" required />
-									<input type="submit" value="Upload" class="submit" />
-								</div>
-							</form>
-						</center>
-					</div>
-					<h4 id='loading' >loading..</h4>
-					<div id="message"></div>
-            	</div>
-
-                <div class="col-md-6" style="background-color:purple;">
+            	<h2 class="lead center-text">Vendor Registration</h2>
+                <div class="col-md-6">
                     <form ng-app="myApp" style="margin-top:-20px;" method="post" id="reg-form" ng-controller="validateCtrl" name="myForm">
                         <br>
                         <br>   

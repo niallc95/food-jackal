@@ -144,10 +144,29 @@ if($_POST){
    	<script type="text/javascript">resetForm()</script>
 	
 	<?php
-	//Push data to the database 
-	$insert = "INSERT INTO Vendor(vendorName, vendorAddressLine1, vendorAddressLine2, vendorCity, vendorTelephone, vendorAccountCreation, vendorLogoImageName,vendorDescription,vendorEmail,vendorPassword )VALUES ('$cName', '$addressLine1', '$addressLine2', '$city','$phone', NOW( ),'logo.jpg','$description','$email' , '$pass1')";
-	$connection-> insertData($insert);
-	$connection->closeConnection();
+
+
+	//Create folder to store vendors files eg images etc
+	//Generate random number for folder name to stop conflict
+	$cleansedCName =preg_replace("/[^A-Za-z0-9 ]/", '', $cName);
+    $rand = rand(1,1000000);
+	$cleansedCName = str_replace(" ", "_", $cleansedCName);  
+	$vendorFolderName = $cleansedCName.'_'.$rand;
+
+	//Check if folder exists
+	if(file_exists($vendorFolderName)){
+			$rand = rand(1,1000000);//Gen new rand num
+			$vendorFolderName = $cleansedCName.'_'.$rand;
+	}else{
+		mkdir("../../images/Vendor/".$vendorFolderName,0777);//Vendor root folder
+		mkdir("../../images/Vendor/".$vendorFolderName."/products",0777);//folder to store product images
+		//Push data to the database 
+		$insert = "INSERT INTO Vendor(vendorName, vendorAddressLine1, vendorAddressLine2, vendorCity, vendorTelephone, vendorAccountCreation,vendorFolderName,vendorDescription,vendorEmail,vendorPassword )VALUES ('$cName', '$addressLine1', '$addressLine2', '$city','$phone', NOW( ),'$vendorFolderName','$description','$email' , '$pass1')";
+		$connection-> insertData($insert);
+		$connection->closeConnection();
+		}
+
+	
 	?>
 	
 	
