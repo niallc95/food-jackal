@@ -201,7 +201,6 @@
 							name="description"
 							placeholder="Enter a small description of what foods your company provides. Roughly 20-40 words."
 							required>
-						
 						</textarea>
 			            <span style="color:red" ng-show="myForm.description.$dirty && myForm.description.$invalid">
 							<span ng-show="myForm.description.$error.required">A brief description is required.</span>
