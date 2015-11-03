@@ -18,8 +18,6 @@ $con->connectToDatabase();
 if(isset($_POST['submit'])){_
 $email = $_POST['email'];
 $pass = $_POST['pass'];
-$cust = $_POST['customer'];
-$vend = $_POST['vendor'];
 }
 else{
 	include "Login.php";
@@ -28,10 +26,12 @@ else{
 }
 
 if(isset($_POST['customer'])){
+	$cust = $_POST['customer'];
 $query = "SELECT * FROM Customer WHERE customerPassword='$pass' AND customerEmail='$email'";	
 }
 else if(isset($_POST['vendor'])){
-$query = "SELECT * FROM users WHERE vendorPassword='$pass' AND vendorEmail='$email''";		
+$vend = $_POST['vendor'];
+$query = "SELECT * FROM Vendor WHERE vendorPassword='$pass' AND vendorEmail='$email''";		
 }
 else{
 	header("Location: ../index.php");
@@ -56,9 +56,17 @@ if($row_count == 1){
 	$row = mysqli_fetch_array($result);
 
 	//make user cookie
+	if(isset($vend)){
+		$cookie_name = "user";
+	$cookie_value = $row['vendorName'];
+	setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
+	}
+	else if(isset($cust)){
 	$cookie_name = "user";
 	$cookie_value = $row['fname']+" "+ $row['lname'];
 	setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
+	}
+
 
 	header('Location: ../index.php');
 }
