@@ -6,24 +6,20 @@ if(isset($_COOKIE['user'])){
 }
 
 //if the user tries to open this script without form action
-if(!(isset($_POST['email']))&&(!(isset($_POST['pass'])))&&((!(isset($_POST['customer'])))or(!(isset($_POST['vendor']))))){
-	header("Location: ../index.php");
-}
-
-include('../food-jackal/classes/database/database-connect.php');
-
-$con = new Database;
-$con->connectToDatabase();
-
-if(isset($_POST['submit'])){_
-$email = $_POST['email'];
-$pass = $_POST['pass'];
-}
-else{
+if((!(isset($_POST['email'])))and(!(isset($_POST['pass'])))and((!(isset($_POST['customer'])))or(!(isset($_POST['vendor']))))){
 	include "Login.php";
 	session_start();
 	$_SESSION['error'] = "Something went wrong. Please try again.";
 }
+
+include '../food-jackal/classes/database/database-connect.php';
+//include '../classes/database/database-connect.php';
+$con = new Database();
+$con->connectToDatabase();
+
+$email = $_POST['email'];
+$pass = $_POST['pass'];
+
 
 if(isset($_POST['customer'])){
 	$cust = $_POST['customer'];
@@ -39,13 +35,14 @@ else{
 
 
 if($result = $con->selectData($query)){
-	$row_count = $mysqli_num_rows($result);	
+	$row_count = mysqli_num_rows($result);	
 }
 else{
 	//login error, display on login page
-	include "Login.php";
 	session_start();
 	$_SESSION['error'] = "Something went wrong. Please try again.";
+	include "Login.php";
+	die;
 }
 
 if($row_count == 1){
