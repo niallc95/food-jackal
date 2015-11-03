@@ -28,10 +28,10 @@ else{
 }
 
 if(isset($_POST['customer'])){
-$query = "SELECT * FROM users WHERE password='$pass' AND email='$email'AND position='$cust'";	
+$query = "SELECT * FROM Customer WHERE customerPassword='$pass' AND customerEmail='$email'";	
 }
 else if(isset($_POST['vendor'])){
-$query = "SELECT * FROM users WHERE password='$pass' AND email='$email' AND position='$vend'";		
+$query = "SELECT * FROM users WHERE vendorPassword='$pass' AND vendorEmail='$email''";		
 }
 else{
 	header("Location: ../index.php");
