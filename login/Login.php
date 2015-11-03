@@ -119,21 +119,20 @@ function check(){
     <div class="form-group">
       <label for="usr">E-mail:</label>
       <input type="email" class="form-control" id="email"  name="email">
-    </div><form role="form">
+    </div>
     <div class="form-group">
       <label for="pwd">Password:</label>
       <input type="password" class="form-control" name="pass" id="pass" placeholder ="Enter in your password.">
     </div>
     <div class="col-sm-offset-0 col-sm-10">
         <input type = "submit" name ="submit" class="btn btn-success" onclick="check()" value="Submit!"/>
-   </div>
+       <span style="padding: 45px;"> <label class="radio-inline"><input type="radio" name="vendor"/>Vendor</label>
+		<label class="radio-inline"><input type="radio" name="customer"/>Customer</label></span>
 
       </div>
   </form>
       </div>
         </div>
-
-    </div>
     <!-- /.container -->
 
     <div class="container">
